@@ -13,6 +13,7 @@
             <img src="{{$comic->image}}" alt="{{$comic->title}}">
         </div>
         <p>{!!$comic->description!!}</p>
-
+        <a class="btn btn-primary" href="{{route('comics.index')}}">Torna all'elenco dei fumetti</a>
     </div>
+
 @endsection

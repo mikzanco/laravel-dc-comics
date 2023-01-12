@@ -35,6 +35,7 @@
                 <label for="description" class="form-label">Descrizione</label>
                 <textarea class="form-control" id="description" rows="3"></textarea>
             </div>
+            <button type="submit" class="btn btn-primary">INVIA</button>
         </form>
     </div>
 

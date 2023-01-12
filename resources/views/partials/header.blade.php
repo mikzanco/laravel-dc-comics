@@ -5,7 +5,7 @@
         </a>
 
     </div>
-    <div class="text-center">
+    <div class="text-center py-4">
         <a class="btn btn-success " href="{{route('comics.create')}}">Inserisci un nuovo fumetto</a>
     </div>
 

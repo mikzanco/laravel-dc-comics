@@ -3,22 +3,29 @@
 @section('content')
 
     <div class="container">
-        <h1>Fumetti</h1>
+        <h1 class="py-5">Fumetti</h1>
+        <div class="row">
+            @forelse($comics as $comic)
 
-        {{-- @forelse($$comics as $comic)
-            <div class="card" style="width: 18rem;">
-                <img src="{{$comic->thumb}}" class="card-img-top" alt="{{$comic->title}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{$comic->title}}</h5>
-                    <p class="card-text">{{$comic->description}}</p>
-                    <a href="#" class="btn btn-primary">XXXX</a>
-                </div>
-            </div>
-        @empty
+                    <div class="col-4">
+                        <div class="card d-flex" style="width: 18rem;">
+                            <img src="{{$comic->image}}" class="card-img-top" alt="{{$comic->title}}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{$comic->title}}</h5>
+                                <div class="overflow-auto">
+                                    <p class="card-text scrollbar">{{$comic->description}}</p>
+                                </div>
 
-        @endforelse --}}
+                                <a class="btn btn-primary justify-center" href="{{route('comics.show', $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
 
+            @empty
 
+            @endforelse
+        </div>
+        <!--
         <table class="table">
             <thead>
               <tr>
@@ -45,6 +52,7 @@
 
             </tbody>
           </table>
+        -->
           {{ $comics->links()}}
     </div>
 @endsection

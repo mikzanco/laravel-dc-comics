@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComicController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ComicController::class, 'index'])->name('home');
 
 // tutte le rotte avranno come base comics
 Route::resource('comics', ComicController::class);

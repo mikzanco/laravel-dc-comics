@@ -34,7 +34,7 @@
                         <th>{{$comic->id}}</th>
                         <td>{{$comic->title}}</td>
                         <td>{{$comic->type}}</td>
-                        <td>XXXX</td>
+                        <td><a class="btn btn-primary" href="{{route('comics.show', $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a></td>
                     </tr>
                 @empty
 
@@ -44,5 +44,6 @@
 
             </tbody>
           </table>
+          {{ $comics->links()}}
     </div>
 @endsection

@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-        <h1>ciaoo elenco comics</h1>
+        <h1>Fumetti</h1>
 
         {{-- @forelse($$comics as $comic)
             <div class="card" style="width: 18rem;">
@@ -35,6 +35,7 @@
                         <td>{{$comic->title}}</td>
                         <td>{{$comic->type}}</td>
                         <td><a class="btn btn-primary" href="{{route('comics.show', $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a></td>
+                        {{-- <td><a class="" href=""></a></td> --}}
                     </tr>
                 @empty
 

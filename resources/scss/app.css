@@ -1,1 +1,8 @@
+.card-body{
+    max-height: 400px;
 
+}
+
+.card-text{
+    overflow-y: scroll;
+}

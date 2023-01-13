@@ -10,12 +10,11 @@
                     <div class="col-4">
                         <div class="card d-flex" style="width: 18rem;">
                             <img src="{{$comic->image}}" class="card-img-top" alt="{{$comic->title}}">
-                            <div class="card-body">
+                            <div class="card-body ">
                                 <h5 class="card-title">{{$comic->title}}</h5>
-                                <div class="overflow-auto">
-                                    <p class="card-text scrollbar">{{$comic->description}}</p>
+                                <div class="overflow-auto h-70">
+                                    <p class="card-text ">{{$comic->description}}</p>
                                 </div>
-
                                 <a class="btn btn-primary justify-center" href="{{route('comics.show', $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a>
                             </div>
                         </div>

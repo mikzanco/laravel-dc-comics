@@ -5,8 +5,8 @@
     <div class="container py-5">
         <h1>Inserisci un nuovo fumetto</h1>
 
-        @if($error->any())
-            <div class="alert alert-dark" role="alert">
+        @if($errors->any())
+            <div class="alert alert-danger" role="alert">
                 <ul>
                     @foreach($errors->all() as $error)
                         <li>{{$error}}</li>
@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione *</label>
-                <textarea class="form-control" id="description" value="{{old('description')}}" name="description" rows="3">
+                <textarea class="form-control" id="description"  name="description" rows="3">
                     {{old('description')}}
                 </textarea>
             </div>

@@ -4,6 +4,14 @@
 
     <div class="container">
         <h1 class="py-5">Fumetti</h1>
+
+        @if(session('deleted'))
+            <div class="alert alert-secondary" role="alert">
+                {{session('deleted')}}
+            </div>
+        @endif
+
+
         <div class="row">
             @forelse($comics as $comic)
 
@@ -16,6 +24,19 @@
                                     <p class="card-text ">{{$comic->description}}</p>
                                 </div>
                                 <a class="btn btn-primary justify-center" href="{{route('comics.show', $comic)}}" title="show"><i class="fa-solid fa-eye"></i></a>
+                                <a class="btn btn-warning justify-center" href="{{route('comics.edit', $comic)}}" title="edit"><i class="fa-solid fa-pen"></i></a>
+
+                                {{-- per il DELETED serve un form --}}
+                                <form
+                                    onsubmit="return confirm('Conferma l\'eliminazione di: {{$comic->title}}')"
+                                    class="d-inline"
+                                    action="{{route('comics.destroy', $comic)}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" title="delete">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -37,18 +37,44 @@ class ComicController extends Controller
     public function store(Request $request)
     {
 
+        /* VALIDAZIONE */
+        $request->validate([
+            'title' => 'required|max:100|min:2',
+            'image' => 'required|max:255|min:10',
+            'series' => 'required|max:255|min:3',
+            'price' => 'required|min:0',
+            'sale_date' => 'required|max:255|min:0',
+            'type' => 'required|max:255|min:10',
+            'description' => 'required|min:4',
+        ],
+    [
+        'title.requires' => 'Il titolo è un campo obbligatorio',
+        'title.max' => 'Il titolo deve al massimo :max caratteri',
+        'title.min' => 'Il titolo deve al minimo :min caratteri',
+        'image.requires' => 'La URL è un campo obbligatorio',
+        'image.max' => 'L\'immagine al massimo :max caratteri',
+        'image.min' => 'L\'immagine al minimo :min caratteri',
+        'price.requires' => 'Il prezzo è un campo obbligatorio',
+        'price.min' => 'Il prezzo minimo è :min ',
+
+    ]);
+
         $form_data = $request->all();
 
         $new_comic = new Comic();
-        $new_comic->title = $form_data['title'];
-        $new_comic->slug = Comic::generateSlug($new_comic->title);
+        // $new_comic->title = $form_data['title'];
+        // $new_comic->slug = Comic::generateSlug($new_comic->title);
         // $new_comic->description = $form_data['description'];
-        $new_comic->description = $form_data['description'];
-        $new_comic->image = $form_data['image'];
-        $new_comic->price = $form_data['price'];
-        $new_comic->series = $form_data['series'];
-        $new_comic->sale_date = $form_data['sale_date'];
-        $new_comic->type = $form_data['type'];
+        // $new_comic->image = $form_data['image'];
+        // $new_comic->price = $form_data['price'];
+        // $new_comic->series = $form_data['series'];
+        // $new_comic->sale_date = $form_data['sale_date'];
+        // $new_comic->type = $form_data['type'];
+
+        // creato il fill in model posso associare tutte le chiavi che sono in fillable model
+
+        $form_data['slug'] = Comic::generateSlug($form_data['title']);
+        $new_comic->fill($form_data);
         $new_comic->save();
         // dd($new_comic);
         return redirect()->route('comics.show', $new_comic);
@@ -73,9 +99,9 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comic $comic)
     {
-        //
+        return view('comics.edit', compact('comic'));
     }
 
     /**
@@ -85,9 +111,23 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $form_data = $request->all();
+        // dump($comic);
+        // dd($form_data);
+
+        if ($form_data['title'] != $comic->title) {
+            $form_data['slug'] = Comic::generateSlug($form_data['title']);
+
+        }else{
+            $form_data['slug'] = $comic->slug;
+        }
+
+        $comic->update($form_data);
+        // reinderizzo alla show
+
+        return redirect()->route('comics.show', $comic);
     }
 
     /**
@@ -96,8 +136,11 @@ class ComicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        // con un return torniamo alla index
+        return redirect()->route('comics.index')->with('deleted', "Il fumetto $comic->title è stato eliminato correttamente");
     }
 }

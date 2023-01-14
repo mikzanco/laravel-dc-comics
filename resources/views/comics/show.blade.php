@@ -7,7 +7,7 @@
 
         <div>Serie: <strong>{{$comic->series}}</strong></div>
         <div>Data: <strong>{{$comic->sale_date}}</strong></div>
-        <div>Prezzo: <strong>{{$comic->price}}</strong></div>
+        <div>Prezzo: <strong>{{$comic->price}} €</strong></div>
 
         <div class="text-center py-5">
             <img src="{{$comic->image}}" alt="{{$comic->title}}">
